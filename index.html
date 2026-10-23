@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Heartfelt Apology for Fairy Bharvani ❤️</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --primary-pink: #ff4d6d;
+      --secondary-pink: #ff758f;
+      --soft-pink: #ffe5ec;
+      --light-pink: #fff0f3;
+      --dark-pink: #c9184a;
+      --bg-gradient: linear-gradient(135deg, #fff5f7 0%, #fedfe8 50%, #ffe9ee 100%);
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --card-shadow: 0 10px 30px rgba(255, 117, 143, 0.22);
+      --text-dark: #59253a;
+      --text-muted: #804a60;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg-gradient);
+      font-family: 'Nunito', sans-serif;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating hearts canvas */
+    #hearts-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .main-wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    /* Header styling */
+    .hero-header {
+      text-align: center;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    .love-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 77, 109, 0.12);
+      color: var(--dark-pink);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(255, 77, 109, 0.25);
+      margin-bottom: 14px;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.4rem;
+      font-weight: 700;
+      color: var(--dark-pink);
+      line-height: 1.2;
+      text-shadow: 2px 3px 12px rgba(201, 24, 74, 0.15);
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .highlight-name {
+      color: var(--primary-pink);
+      font-weight: 800;
+      position: relative;
+    }
+
+    /* Music toggle button */
+    .music-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      background: white;
+      border: 2px solid var(--primary-pink);
+      color: var(--primary-pink);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 15px rgba(255, 77, 109, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.1) rotate(15deg);
+      background: var(--light-pink);
+    }
+
+    /* Apology Tiles */
+    .tiles-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .tile-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 28px 32px;
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      box-shadow: var(--card-shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .tile-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary-pink), var(--secondary-pink));
+      border-top-left-radius: 24px;
+      border-bottom-left-radius: 24px;
+    }
+
+    .tile-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(255, 117, 143, 0.3);
+    }
+
+    .tile-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .tile-icon {
+      font-size: 2.2rem;
+      background: var(--soft-pink);
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 77, 109, 0.2);
+    }
+
+    .tile-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: var(--dark-pink);
+    }
+
+    .tile-text {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text-dark);
+      letter-spacing: 0.1px;
+    }
+
+    /* Final Question Section */
+    .proposal-box {
+      width: 100%;
+      background: white;
+      border-radius: 30px;
+      padding: 40px 30px;
+      text-align: center;
+      border: 2px solid rgba(255, 77, 109, 0.3);
+      box-shadow: 0 18px 45px rgba(255, 77, 109, 0.25);
+      position: relative;
+      overflow: visible;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .proposal-question {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--dark-pink);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .plea-message {
+      min-height: 38px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-pink);
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    /* Button arena */
+    .button-arena {
+      position: relative;
+      width: 100%;
+      min-height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .btn-yes {
+      background: linear-gradient(135deg, #ff4d6d, #ff758f);
+      color: white;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1.35rem;
+      padding: 16px 42px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(255, 77, 109, 0.45);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s, font-size 0.2s;
+      z-index: 10;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      user-select: none;
+    }
+
+    .btn-yes:hover {
+      box-shadow: 0 12px 32px rgba(255, 77, 109, 0.6);
+    }
+
+    .btn-no {
+      background: white;
+      color: #9e7b8c;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      padding: 14px 34px;
+      border: 2px solid #e0c8d2;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.15s ease-out;
+      z-index: 5;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    /* Giant Fullscreen Yes Mode */
+    .fullscreen-yes {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      border-radius: 0 !important;
+      font-size: 3rem !important;
+      z-index: 99999 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      animation: pulseGrow 1.2s infinite alternate !important;
+      box-shadow: 0 0 80px rgba(255, 77, 109, 0.9) !important;
+      text-align: center;
+      padding: 20px;
+      line-height: 1.3;
+    }
+
+    .fullscreen-yes small {
+      font-size: 1.4rem;
+      margin-top: 15px;
+      font-weight: 600;
+      opacity: 0.95;
+    }
+
+    /* Success overlay */
+    .success-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255, 240, 243, 0.96);
+      backdrop-filter: blur(16px);
+      z-index: 100000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .success-card {
+      background: white;
+      max-width: 580px;
+      width: 100%;
+      border-radius: 36px;
+      padding: 48px 36px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(255, 77, 109, 0.35);
+      border: 3px solid var(--soft-pink);
+      position: relative;
+      animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .success-badge {
+      font-size: 4rem;
+      margin-bottom: 12px;
+      animation: heartbeat 1.3s infinite ease-in-out;
+      display: inline-block;
+    }
+
+    .success-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.2rem;
+      color: var(--dark-pink);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .success-subtitle {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-pink);
+      margin-bottom: 20px;
+    }
+
+    .success-text {
+      font-size: 1.05rem;
+      color: var(--text-dark);
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .signature-tag {
+      display: inline-block;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      color: var(--dark-pink);
+      border-top: 1px dashed var(--secondary-pink);
+      padding-top: 14px;
+      margin-top: 10px;
+    }
+
+    .btn-celebrate {
+      background: linear-gradient(135deg, #ff4d6d, #c9184a);
+      color: white;
+      border: none;
+      font-size: 1.15rem;
+      font-weight: 800;
+      padding: 14px 34px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(201, 24, 74, 0.4);
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .btn-celebrate:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 12px 30px rgba(201, 24, 74, 0.5);
+    }
+
+    /* Keyframes */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.04); }
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      14% { transform: scale(1.2); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.2); }
+      70% { transform: scale(1); }
+    }
+
+    @keyframes pulseGrow {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.02); }
+    }
+
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.6); }
+      70% { opacity: 1; transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero-title { font-size: 2.6rem; }
+      .proposal-question { font-size: 2.2rem; }
+      .tile-card { padding: 22px 20px; }
+      .main-wrapper { padding: 30px 16px 60px; }
+      .btn-yes { font-size: 1.15rem; padding: 14px 32px; }
+      .fullscreen-yes { font-size: 2.2rem !important; }
+      .button-arena { min-height: 180px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating hearts canvas background -->
+  <canvas id="hearts-canvas"></canvas>
+
+  <!-- Ambient audio tone toggle (gentle romantic chime) -->
+  <button class="music-btn" id="musicBtn" title="Play gentle love chimes" aria-label="Toggle ambient chimes">
+    🎵
+  </button>
+
+  <div class="main-wrapper">
+    <!-- Header -->
+    <header class="hero-header">
+      <div class="love-badge">
+        <span>✨ From Kartik Ahlawat's Heart ✨</span>
+      </div>
+      <h1 class="hero-title">I'm Truly Sorry, Fairy</h1>
+      <p class="hero-subtitle">
+        To the most special girl in my life, <span class="highlight-name">Fairy Bharvani</span>.
+        Seeing you upset because of my behavior breaks me, and I want to make things right.
+      </p>
+    </header>
+
+    <!-- Apology Tiles (3 Heartfelt Cards) -->
+    <main class="tiles-container">
+
+      <!-- Tile 1: Acknowledgment -->
+      <article class="tile-card" style="animation-delay: 0.1s;">
+        <div class="tile-header">
+          <div class="tile-icon">🥺</div>
+          <h2 class="tile-title">Owning My Mistake</h2>
+        </div>
+        <p class="tile-text">
+          Dear Fairy, I know that my words and behavior were completely wrong, and I take full responsibility for hurting you. 
+          You never deserved that tone or that carelessness. You bring so much warmth, kindness, and beauty into my days, 
+          and knowing that I caused you pain weighs so heavily on my heart. I am genuinely, deeply sorry.
+        </p>
+      </article>
+
+      <!-- Tile 2: What You Mean to Kartik -->
+      <article class="tile-card" style="animation-delay: 0.25s;">
+        <div class="tile-header">
+          <div class="tile-icon">💖</div>
+          <h2 class="tile-title">You Mean Everything to Me</h2>
+        </div>
+        <p class="tile-text">
+          Fairy Bharvani, your cute smile is my absolute favorite sight in the world, and your laughter is my happiness. 
+          When you are quiet or angry with me, everything around me feels dull and empty. I never want to be the reason for 
+          even a single tear in your eyes. You are precious to me, far more than I can ever express in words.
+        </p>
+      </article>
+
+      <!-- Tile 3: The Promise -->
+      <article class="tile-card" style="animation-delay: 0.4s;">
+        <div class="tile-header">
+          <div class="tile-icon">💍</div>
+          <h2 class="tile-title">Kartik's Sacred Promise</h2>
+        </div>
+        <p class="tile-text">
+          I promise you today, with all my heart, that I will never repeat this mistake again. I will listen to you more patiently, 
+          understand you better, and always treat you with the softness, respect, and boundless love that you deserve. 
+          I am committed to being the best partner for you, every single day.
+        </p>
+      </article>
+
+      <!-- Final Interactive Question Section -->
+      <section class="proposal-box" id="proposalSection">
+        <h2 class="proposal-question">Do you accept my apology, Fairy? 🥺</h2>
+        
+        <div class="plea-message" id="pleaText">
+          Please forgive Kartik... I promise to give you unlimited hugs & pampering! ❤️
+        </div>
+
+        <div class="button-arena" id="buttonArena">
+          <button class="btn-yes" id="yesBtn">
+            Yes, I forgive you! 🥰❤️
+          </button>
+          <button class="btn-no" id="noBtn">
+            No 😤
+          </button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Success Celebration Modal -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-card">
+      <div class="success-badge">💖🎉🥰</div>
+      <h2 class="success-title">She Said Yes!</h2>
+      <div class="success-subtitle">Fairy Forgave Kartik! ❤️✨</div>
+      <p class="success-text">
+        Thank you so much, my gorgeous Fairy! You just made Kartik the happiest boy in the world. 
+        I promise to protect your smile, cherish you endlessly, and never let you down again. 
+        Sending you a million tight hugs and kisses right now! 🧸🍫🌸
+      </p>
+      <div>
+        <span class="signature-tag">Forever & Always Yours,<br>Kartik Ahlawat ❤️</span>
+      </div>
+      <br>
+      <button class="btn-celebrate" id="celebrateAgainBtn">
+        Celebrate With More Hearts! 💖
+      </button>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================
+       1. CANVAS BACKGROUND FLOATING HEARTS & PARTICLES
+       ========================================================== */
+    const canvas = document.getElementById('hearts-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const hearts = [];
+    const heartSymbols = ['❤️', '💖', '💕', '🌸', '✨', '💗', '🥰'];
+
+    class FloatingHeart {
+      constructor() {
+        this.reset(true);
+      }
+      reset(initial = false) {
+        this.x = Math.random() * width;
+        this.y = initial ? Math.random() * height : height + 30;
+        this.size = Math.random() * 16 + 14;
+        this.speedY = Math.random() * 1.2 + 0.6;
+        this.speedX = (Math.random() - 0.5) * 0.8;
+        this.symbol = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+        this.opacity = Math.random() * 0.6 + 0.3;
+        this.angle = Math.random() * 360;
+        this.angularSpeed = (Math.random() - 0.5) * 1.5;
+      }
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX;
+        this.angle += this.angularSpeed;
+        if (this.y < -40) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.angle * Math.PI) / 180);
+        ctx.globalAlpha = this.opacity;
+        ctx.font = `${this.size}px serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.symbol, 0, 0);
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 35; i++) {
+      hearts.push(new FloatingHeart());
+    }
+
+    function animateHearts() {
+      ctx.clearRect(0, 0, width, height);
+      for (let heart of hearts) {
+        heart.update();
+        heart.draw();
+      }
+      requestAnimationFrame(animateHearts);
+    }
+    animateHearts();
+
+    /* ==========================================================
+       2. GENTLE WEB AUDIO CHIMES (NO EXTERNAL AUDIO FILE NEEDED)
+       ========================================================== */
+    let audioCtx = null;
+    let isPlayingMusic = false;
+    let musicInterval = null;
+    const musicBtn = document.getElementById('musicBtn');
+
+    const romanticChords = [
+      [261.63, 329.63, 392.00, 523.25], // C major
+      [220.00, 261.63, 329.63, 440.00], // A minor
+      [174.61, 220.00, 261.63, 349.23], // F major
+      [196.00, 246.94, 293.66, 392.00]  // G major
+    ];
+    let chordIndex = 0;
+
+    function playSoftNote(freq, delay = 0, duration = 1.8) {
+      if (!audioCtx) return;
+      setTimeout(() => {
+        try {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+          gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 0.1);
+          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc.start();
+          osc.stop(audioCtx.currentTime + duration);
+        } catch (e) {
+          console.error(e);
+        }
+      }, delay);
+    }
+
+    function playChordProgression() {
+      const chord = romanticChords[chordIndex % romanticChords.length];
+      chordIndex++;
+      chord.forEach((freq, idx) => {
+        playSoftNote(freq, idx * 300, 2.8);
+      });
+    }
+
+    function toggleMusic() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      if (!isPlayingMusic) {
+        isPlayingMusic = true;
+        musicBtn.textContent = '🔊';
+        playChordProgression();
+        musicInterval = setInterval(playChordProgression, 3200);
+      } else {
+        isPlayingMusic = false;
+        musicBtn.textContent = '🎵';
+        clearInterval(musicInterval);
+      }
+    }
+    musicBtn.addEventListener('click', toggleMusic);
+
+    /* ==========================================================
+       3. INTERACTIVE "NO" EVASION & "YES" GROWING LOGIC
+       ========================================================== */
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const pleaText = document.getElementById('pleaText');
+    const buttonArena = document.getElementById('buttonArena');
+    const successOverlay = document.getElementById('successOverlay');
+    const celebrateAgainBtn = document.getElementById('celebrateAgainBtn');
+
+    let noCount = 0;
+    let yesScale = 1.0;
+
+    const pleaMessages = [
+      "Fairy please? Just look at Kartik's puppy eyes... 🥺💔",
+      "I brought your favorite chocolates, sweet treats & all the love! 🍫🧸",
+      "Pretty please Fairy Bharvani? Kartik will never, ever do it again! 🌸✨",
+      "Are you 100% sure? Kartik's heart is beating only for your forgiveness! 🥺❤️",
+      "NO IS OFFICIALLY NOT ALLOWED! You HAVE to forgive Kartik now! 💖🥰🎉"
+    ];
+
+    function handleNoAttempt() {
+      noCount++;
+      yesScale += 0.45;
+
+      // Update plea message
+      const msgIndex = Math.min(noCount - 1, pleaMessages.length - 1);
+      pleaText.textContent = pleaMessages[msgIndex];
+      pleaText.style.transform = 'scale(1.08)';
+      setTimeout(() => {
+        pleaText.style.transform = 'scale(1)';
+      }, 200);
+
+      // Play cute gentle boop tone
+      if (audioCtx) {
+        playSoftNote(587.33, 0, 0.4);
+      }
+
+      // Check if 5th attempt reached
+      if (noCount >= 5) {
+        triggerMegaYesMode();
+        return;
+      }
+
+      // Grow Yes button
+      yesBtn.style.transform = `scale(${yesScale})`;
+
+      // Teleport the No button away
+      dodgeNoButton();
+    }
+
+    // Dodging function for the NO button
+    function dodgeNoButton() {
+      noBtn.style.position = 'fixed';
+      
+      const padding = 30;
+      const btnWidth = noBtn.offsetWidth || 110;
+      const btnHeight = noBtn.offsetHeight || 50;
+
+      const maxX = window.innerWidth - btnWidth - padding;
+      const maxY = window.innerHeight - btnHeight - padding;
+
+      const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+      const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
+    }
+
+    // Mouse pointer proximity evasion (tracks cursor and scampers away)
+    document.addEventListener('mousemove', (e) => {
+      if (noCount >= 5) return; // In mega mode, Yes covers the screen
+
+      const rect = noBtn.getBoundingClientRect();
+      const noCenterX = rect.left + rect.width / 2;
+      const noCenterY = rect.top + rect.height / 2;
+
+      const distX = e.clientX - noCenterX;
+      const distY = e.clientY - noCenterY;
+      const distance = Math.hypot(distX, distY);
+
+      // Trigger runaway if mouse gets within 110px
+      if (distance < 110) {
+        dodgeNoButton();
+        
+        // Gentle micro grow for Yes button on near-miss
+        if (noCount < 4) {
+          yesScale += 0.08;
+          yesBtn.style.transform = `scale(${yesScale})`;
+        }
+      }
+    });
+
+    // Mobile / Touch support for runaway
+    noBtn.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      handleNoAttempt();
+    });
+
+    // Click event for No button
+    noBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      handleNoAttempt();
+    });
+
+    // Mouseover event for No button
+    noBtn.addEventListener('mouseenter', () => {
+      handleNoAttempt();
+    });
+
+    // MEGA YES: Fills the entire page after 5 attempts
+    function triggerMegaYesMode() {
+      yesBtn.classList.add('fullscreen-yes');
+      yesBtn.innerHTML = `
+        <span>💖 YES, I FORGIVE KARTIK! 💖</span>
+        <small>Click anywhere on this screen, my dearest Fairy! You can't say No anymore! 🥰</small>
+      `;
+
+      // Completely hide or send No button off-screen
+      noBtn.style.display = 'none';
+      pleaText.textContent = "Hooray! The only choice left is unconditional love! 🥰❤️";
+
+      // Launch some playful celebratory mini-sparkles
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: { y: 0.6 }
+      });
+    }
+
+    /* ==========================================================
+       4. CELEBRATION / YES CLICKED
+       ========================================================== */
+    function celebrateForgiveness() {
+      // Start audio chimes automatically if not started
+      if (!isPlayingMusic) {
+        toggleMusic();
+      }
+
+      // Show celebration overlay
+      successOverlay.style.display = 'flex';
+
+      // Massive heart confetti explosion
+      launchConfettiExplosion();
+    }
+
+    function launchConfettiExplosion() {
+      const duration = 4.5 * 1000;
+      const animationEnd = Date.now() + duration;
+
+      const heartDefaults = {
+        spread: 360,
+        ticks: 90,
+        gravity: 0.8,
+        decay: 0.94,
+        startVelocity: 30,
+        shapes: ['circle'],
+        colors: ['#ff4d6d', '#ff758f', '#ff85a1', '#fbb1bd', '#ffffff']
+      };
+
+      const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+
+        const particleCount = 45 * (timeLeft / duration);
+        // Confetti shooting from left and right edges
+        confetti(Object.assign({}, heartDefaults, {
+          particleCount,
+          origin: { x: randomInRange(0.1, 0.35), y: Math.random() - 0.2 }
+        }));
+        confetti(Object.assign({}, heartDefaults, {
+          particleCount,
+          origin: { x: randomInRange(0.65, 0.9), y: Math.random() - 0.2 }
+        }));
+      }, 250);
+    }
+
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    yesBtn.addEventListener('click', celebrateForgiveness);
+    celebrateAgainBtn.addEventListener('click', () => {
+      launchConfettiExplosion();
+      if (audioCtx) {
+        playChordProgression();
+      }
+    });
+
+  </script>
+</body>
+</html>
